@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Scoll pHat interface -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+    <title>Scroll pHat Dashboard</title>
+    <link rel="stylesheet" type="text/css"  href="/CSS/Scroll.css" media="screen and (min-width: 751px)" />
+    <link rel="stylesheet" type="text/css"  href="/CSS/Scroll-m.css" media="screen and (max-width: 750px)" />
+    <script language="Javascript">
+      // ajaxFunction - Make an AJAX request via get, and update the HTML of the web page
+      //   serverFile - Server script to run
+      //   action - what command to send to the server script
+      //   tagID - DOM element that is to be replaced with the result from the server
+      function ajaxFunction(serverFile, action, tagID)
+      {
+        // XMLHttpRequest object
+        var ajaxRequest = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+				
+        // define and send the request
+        var URL = serverFile;
+        var form = document.forms['f1'];
+        if (action === "text")
+        {
+          var word = form.word.value;
+          URL += "?w=" + escape(word);
+        }
+        else if (action === "light")
+        {
+          var bright = form.bright.value;
+          URL += "?b=" + bright;
+        }
+        else if (action === "invert")
+        {
+          URL += "?i=true";
+        }
+        ajaxRequest.open("GET", URL, true);
+        ajaxRequest.send();
+        
+        // Function that will receive data sent from the server, which will replace the contents of the HTML tag with tagID
+        ajaxRequest.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            document.getElementById(tagID).innerHTML = this.responseText;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+  <div id="container">
+    <div id="title">
+      <h2>Scrolling Display Dashboard</h2>
+    </div>
+    <div id="result">
+    </div>
+    <form name="f1">
+      <div class="block">
+        <div class="pannel">
+          <input type="text" name="word" />
+          <br />
+          <input type="button" name="text" value="Set Text" onclick="ajaxFunction('scroll.py', this.name , 'result')" />
+        </div>
+      </div>
+      <div class="block">
+        <div class="pannel">
+          <input type="number" name="bright" placeholder="0.0" step="0.05" min="0" max="1" />
+          <br />
+          <input type="button" name="light" value="Set Brightness" onclick="ajaxFunction('scroll.py', this.name , 'result')" />
+        </div>
+      </div>
+      <div class="block">
+        <div class="pannel">
+          <p></p> <!-- push the button down a bit in the pannel -->
+          <input type="button" name="invert" value="Invert"  onclick="ajaxFunction('scroll.py', this.name, 'result')" />
+        </div>
+      </div>
+    </form> 
+  </div> <!-- container -->
+  </body>
+</html>
