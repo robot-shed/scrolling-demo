@@ -1,0 +1,51 @@
+/* base style sheet for desktop Scroll pHat Demo on the web */
+
+body {
+	width: 100%;               /* body is full browser width */
+	color: #0F1626;            /* Navy Blue */
+	background-color: #F5F5F5; /* Eggshell */
+}
+
+/* content styles  */
+
+#container {
+	width: 800px;
+}
+
+#title {
+  text-align: center;
+}
+
+.block {
+  display: inline-block;
+  vertical-align: top;
+  width: 33%; 
+}
+
+.pannel {
+  padding: 10px;       /* push in the contents of the pannel */
+  text-align: center;  /* center the contents of the pannel */
+  width: 70%;
+  margin: 0 auto;      /* center the pannel */
+  height: 50px;        /* make the invert pannel same height */
+  background-color: #AB987A; /* Leather */
+  box-shadow: 10px 10px 5px #0F1626;  /* Navy Blue */
+}
+
+input {
+  margin-bottom: 5px;   /* add a bit of space below the inputs */
+}
+  
+input[type=button] {
+  background-color: #0F1626;  /* Navy Blue */
+  color: #F5F5F5; /* Eggshell */
+  border: 2px solid #FF533D; /* Coral */
+  border-radius: 8px;
+}
+
+#result {
+  text-align: center;
+  color: red;
+  width: 100%;
+  margin-bottom: 1em;
+}
